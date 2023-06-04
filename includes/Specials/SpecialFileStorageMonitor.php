@@ -31,7 +31,7 @@ class SpecialFileStorageMonitor extends SpecialPage {
 	 */
 	private function retrieveFileStorageUsages() {
 		$fileStorageUsages = [];
-		$wikis = $this->getAllWikis();
+		$wikis = $this->getConfig()->get( 'LocalDatabases' );
 
 		foreach ( $wikis as $wiki ) {
 			$usage = $this->retrieveFileStorageUsageForWiki( $wiki );
