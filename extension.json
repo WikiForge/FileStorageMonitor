@@ -6,6 +6,17 @@
 	"descriptionmsg": "filestoragemonitor-desc",
 	"license-name": "GPL-3.0-or-later",
 	"type": "specialpage",
+	"requires": {
+		"MediaWiki": ">= 1.39.0"
+	},
+	"GroupPermissions": {
+		"sysop": {
+			"monitor-file-storage": true
+		}
+	},
+	"AvailableRights": [
+		"monitor-file-storage"
+	],
 	"AutoloadNamespaces": {
 		"WikiForge\\FileStorageMonitor\\": "includes/"
 	},
@@ -29,5 +40,6 @@
 			"value": ""
 		}
 	},
+	"load_composer_autoloader": true,
 	"manifest_version": 2
 }
