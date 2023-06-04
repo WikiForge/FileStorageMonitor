@@ -70,7 +70,7 @@ class SpecialFileStorageMonitor extends SpecialPage {
 
 		$usage = 0;
 		foreach ( $objects as $object ) {
-var_dump( $object );
+var_dump( $object['Contents'] );
 
 			$usage += $object['ContentLength'];
 		}
