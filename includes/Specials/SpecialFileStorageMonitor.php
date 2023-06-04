@@ -29,7 +29,7 @@ class SpecialFileStorageMonitor extends SpecialPage {
 	 * @return array
 	 */
 	private function retrieveFileStorageUsages() {
-		$fileStorageUsages = array();
+		$fileStorageUsages = [];
 		$wikis = $this->getAllWikis();
 
 		foreach ( $wikis as $wiki ) {
