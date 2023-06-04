@@ -40,43 +40,51 @@ class SpecialFileStorageMonitor extends SpecialPage {
 
 		return $fileStorageUsages;
 	}
+/**
+ * Retrieve file storage usage for a specific wiki
+ *
+ * @param string $wiki
+ * @return int
+ */
+private function retrieveFileStorageUsageForWiki($wiki)
+{
+    $bucketName = $this->getConfig()->get('FileStorageMonitorAWSBucketName');
+    $prefix = $this->getConfig()->get('FileStorageMonitorAWSPrefix');
+    $region = $this->getConfig()->get('FileStorageMonitorAWSRegion');
+    $key = $this->getConfig()->get('FileStorageMonitorAWSAccessKey');
+    $secret = $this->getConfig()->get('FileStorageMonitorAWSSecretKey');
 
-	/**
-	 * Retrieve file storage usage for a specific wiki
-	 *
-	 * @param string $wiki
-	 * @return int
-	 */
-	private function retrieveFileStorageUsageForWiki( $wiki ) {
-		$bucketName = $this->getConfig()->get( 'FileStorageMonitorAWSBucketName' );
-		$prefix = $this->getConfig()->get( 'FileStorageMonitorAWSPrefix' );
-		$region = $this->getConfig()->get( 'FileStorageMonitorAWSRegion' );
-		$key = $this->getConfig()->get( 'FileStorageMonitorAWSAccessKey' );
-		$secret = $this->getConfig()->get( 'FileStorageMonitorAWSSecretKey' );
+    $client = new S3Client([
+        'region' => $region,
+        'version' => 'latest',
+        'credentials' => [
+            'key' => $key,
+            'secret' => $secret,
+        ],
+    ]);
 
-		$client = new S3Client( [
-			'region' => $region,
-			'version' => 'latest',
-			'credentials' => [
-				'key' => $key,
-				'secret' => $secret,
-			],
-		] );
+    $usage = 0;
+    $token = null;
+    do {
+        $options = [
+            'Bucket' => $bucketName,
+            'Prefix' => "{$prefix}/{$wiki}/",
+            'ContinuationToken' => $token,
+        ];
 
-		$objects = $client->getPaginator( 'ListObjects', [
-			'Bucket' => $bucketName,
-			'Prefix' => $prefix,
-		] );
+        $result = $client->listObjectsV2($options);
+        $contents = $result['Contents'] ?? [];
+        foreach ($contents as $object) {
+var_dump($object);
+            $usage += $object['Size'];
+        }
 
-		$usage = 0;
-		foreach ( $objects as $object ) {
-var_dump( $object['Contents'] );
+        $token = $result['NextContinuationToken'] ?? null;
+    } while ($token !== null);
 
-			$usage += $object['ContentLength'];
-		}
+    return $usage;
+}
 
-		return $usage;
-	}
 
 	/**
 	 * Display the results
