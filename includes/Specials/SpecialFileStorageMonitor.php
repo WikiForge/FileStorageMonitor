@@ -69,8 +69,8 @@ class SpecialFileStorageMonitor extends SpecialPage {
 		] );
 
 		$usage = 0;
-		foreach ( $objects['Contents'] as $object ) {
-			$usage += $object['Size'];
+		foreach ( $objects as $object ) {
+			$usage += $object['ObjectSize'];
 		}
 
 		return $usage;
