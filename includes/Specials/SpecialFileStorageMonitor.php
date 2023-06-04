@@ -49,7 +49,6 @@ class SpecialFileStorageMonitor extends SpecialPage {
 	 */
 	private function retrieveFileStorageUsageForWiki( $wiki ) {
 		$bucketName = $this->getConfig()->get( 'FileStorageMonitorAWSBucketName' );
-		$prefix = $this->getConfig()->get( 'FileStorageMonitorAWSPrefix' );
 		$region = $this->getConfig()->get( 'FileStorageMonitorAWSRegion' );
 		$key = $this->getConfig()->get( 'FileStorageMonitorAWSAccessKey' );
 		$secret = $this->getConfig()->get( 'FileStorageMonitorAWSSecretKey' );
@@ -65,14 +64,12 @@ class SpecialFileStorageMonitor extends SpecialPage {
 
 		$objects = $client->getIterator( 'ListObjects', [
 			'Bucket' => $bucketName,
-			'Prefix' => $prefix,
+			'Prefix' => $wiki,
 		] );
 
 		$usage = 0;
 		foreach ( $objects as $object ) {
-var_dump( $object );
-
-			$usage += $object['Size'];
+			$usage += round( $object['Size'] ) / 1024 / 1024;
 		}
 
 		return $usage;
@@ -87,7 +84,7 @@ var_dump( $object );
 		$this->getOutput()->addWikiTextAsInterface( 'File Storage Usages:' );
 
 		foreach ( $fileStorageUsages as $wiki => $usage ) {
-			$this->getOutput()->addWikiTextAsInterface( "$wiki: $usage bytes" );
+			$this->getOutput()->addWikiTextAsInterface( "$wiki: $usage MB" );
 		}
 	}
 }
