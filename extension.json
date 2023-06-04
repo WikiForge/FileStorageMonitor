@@ -27,9 +27,6 @@
 		"FileStorageMonitorAWSBucketName": {
 			"value": ""
 		},
-		"FileStorageMonitorAWSPrefix": {
-			"value": ""
-		},
 		"FileStorageMonitorAWSRegion": {
 			"value": ""
 		},
