@@ -40,43 +40,43 @@ class SpecialFileStorageMonitor extends SpecialPage {
 
 		return $fileStorageUsages;
 	}
-/**
- * Retrieve file storage usage for a specific wiki
- *
- * @param string $wiki
- * @return int
- */
-private function retrieveFileStorageUsageForWiki($wiki)
-{
-    $bucketName = $this->getConfig()->get('FileStorageMonitorAWSBucketName');
-    $prefix = $this->getConfig()->get('FileStorageMonitorAWSPrefix');
-    $region = $this->getConfig()->get('FileStorageMonitorAWSRegion');
-    $key = $this->getConfig()->get('FileStorageMonitorAWSAccessKey');
-    $secret = $this->getConfig()->get('FileStorageMonitorAWSSecretKey');
 
-    $client = new S3Client([
-        'region' => $region,
-        'version' => 'latest',
-        'credentials' => [
-            'key' => $key,
-            'secret' => $secret,
-        ],
-    ]);
+	/**
+	 * Retrieve file storage usage for a specific wiki
+	 *
+	 * @param string $wiki
+	 * @return int
+	 */
+	private function retrieveFileStorageUsageForWiki( $wiki ) {
+		$bucketName = $this->getConfig()->get( 'FileStorageMonitorAWSBucketName' );
+		$prefix = $this->getConfig()->get( 'FileStorageMonitorAWSPrefix' );
+		$region = $this->getConfig()->get( 'FileStorageMonitorAWSRegion' );
+		$key = $this->getConfig()->get( 'FileStorageMonitorAWSAccessKey' );
+		$secret = $this->getConfig()->get( 'FileStorageMonitorAWSSecretKey' );
 
-    $result = $client->listObjectsV2([
-        'Bucket' => $bucketName,
-        'Prefix' => "{$prefix}/{$wiki}/",
-    ]);
+		$client = new S3Client( [
+			'region' => $region,
+			'version' => 'latest',
+			'credentials' => [
+				'key' => $key,
+				'secret' => $secret,
+			],
+		] );
 
-    $usage = 0;
-    foreach ($result['Contents'] as $object) {
-        $usage += $object['Size'];
-    }
+		$objects = $client->getIterator( 'ListObjects', [
+			'Bucket' => $bucketName,
+			'Prefix' => $prefix,
+		] );
 
-    return $usage;
-}
+		$usage = 0;
+		foreach ( $objects as $object ) {
+var_dump( $object );
 
+			$usage += $object['Size'];
+		}
 
+		return $usage;
+	}
 
 	/**
 	 * Display the results
