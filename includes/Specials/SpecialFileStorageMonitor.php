@@ -66,12 +66,16 @@ class SpecialFileStorageMonitor extends SpecialPage {
 		$objects = $client->listObjects( [
 			'Bucket' => $bucketName,
 			'Prefix' => $prefix,
-			'ObjectAttributes' => ['ObjectSize'],
 		] );
 
 		$usage = 0;
 		foreach ( $objects as $object ) {
 var_dump( $object );
+			$object = $client->headObject( [
+				'Bucket' => $bucketName,
+				'Key' => $object['Key'],
+			] );
+
 			$usage += $object['ContentLength'];
 		}
 
