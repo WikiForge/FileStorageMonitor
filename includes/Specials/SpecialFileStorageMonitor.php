@@ -66,6 +66,7 @@ class SpecialFileStorageMonitor extends SpecialPage {
 		$objects = $client->listObjects( [
 			'Bucket' => $bucketName,
 			'Prefix' => $prefix,
+			'ObjectAttributes' => ['ObjectSize'],
 		] );
 
 		$usage = 0;
