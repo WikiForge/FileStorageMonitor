@@ -82,10 +82,10 @@ class SpecialFileStorageMonitor extends SpecialPage {
 	 * @param array $fileStorageUsages
 	 */
 	private function outputResults( $fileStorageUsages ) {
-		$this->getOutput()->addWikiText( 'File Storage Usages:' );
+		$this->getOutput()->addWikiTextAsInterface( 'File Storage Usages:' );
 
 		foreach ( $fileStorageUsages as $wiki => $usage ) {
-			$this->getOutput()->addWikiText( "$wiki: $usage bytes" );
+			$this->getOutput()->addWikiTextAsInterface( "$wiki: $usage bytes" );
 		}
 	}
 }
