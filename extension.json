@@ -1,0 +1,33 @@
+{
+	"name": "FileStorageMonitor",
+	"author": "Universal Omega",
+	"version": "1.0",
+	"url": "https://github.com/WikiForge/FileStorageMonitor",
+	"descriptionmsg": "filestoragemonitor-desc",
+	"license-name": "GPL-3.0-or-later",
+	"type": "specialpage",
+	"AutoloadNamespaces": {
+		"WikiForge\\FileStorageMonitor\\": "includes/"
+	},
+	"SpecialPages": {
+		"FileStorageMonitor": "WikiForge\\FileStorageMonitor\\Specials\\SpecialFileStorageMonitor"
+	},
+	"config": {
+		"FileStorageMonitorAWSBucketName": {
+			"value": ""
+		},
+		"FileStorageMonitorAWSPrefix": {
+			"value": ""
+		},
+		"FileStorageMonitorAWSRegion": {
+			"value": ""
+		},
+		"FileStorageMonitorAWSAccessKey": {
+			"value": ""
+		},
+		"FileStorageMonitorAWSSecretKey": {
+			"value": ""
+		}
+	},
+	"manifest_version": 2
+}
