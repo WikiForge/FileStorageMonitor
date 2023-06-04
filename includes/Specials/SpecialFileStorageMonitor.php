@@ -3,6 +3,7 @@
 namespace WikiForge\FileStorageMonitor\Specials;
 
 use Aws\S3\S3Client;
+use SpecialPage;
 
 class SpecialFileStorageMonitor extends SpecialPage {
 	public function __construct() {
