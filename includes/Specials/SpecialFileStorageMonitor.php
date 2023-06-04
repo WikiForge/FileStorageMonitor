@@ -63,7 +63,7 @@ class SpecialFileStorageMonitor extends SpecialPage {
 			],
 		] );
 
-		$objects = $client->getIterator( 'ListObjects', [
+		$objects = $client->getPaginator( 'ListObjects', [
 			'Bucket' => $bucketName,
 			'Prefix' => $prefix,
 		] );
