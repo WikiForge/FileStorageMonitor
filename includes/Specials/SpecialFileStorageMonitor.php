@@ -63,27 +63,19 @@ private function retrieveFileStorageUsageForWiki($wiki)
         ],
     ]);
 
+    $result = $client->listObjectsV2([
+        'Bucket' => $bucketName,
+        'Prefix' => "{$prefix}/{$wiki}/",
+    ]);
+
     $usage = 0;
-    $token = null;
-    do {
-        $options = [
-            'Bucket' => $bucketName,
-            'Prefix' => "{$prefix}/{$wiki}/",
-            'ContinuationToken' => $token,
-        ];
-
-        $result = $client->listObjectsV2($options);
-        $contents = $result['Contents'] ?? [];
-        foreach ($contents as $object) {
-var_dump($object);
-            $usage += $object['Size'];
-        }
-
-        $token = $result['NextContinuationToken'] ?? null;
-    } while ($token !== null);
+    foreach ($result['Contents'] as $object) {
+        $usage += $object['Size'];
+    }
 
     return $usage;
 }
+
 
 
 	/**
