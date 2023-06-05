@@ -29,7 +29,7 @@
 		"WikiForge\\FileStorageMonitor\\": "includes/"
 	},
 	"SpecialPages": {
-		"FileStorageMonitor": "WikiForge\\FileStorageMonitor\\Specials\\SpecialFileStorageMonitor"
+		"FileStorageMonitor": "WikiForge\\FileStorageMonitor\\SpecialFileStorageMonitor"
 	},
 	"config": {
 		"FileStorageMonitorAWSBucketName": {
