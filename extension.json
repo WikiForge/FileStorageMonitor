@@ -1,13 +1,21 @@
 {
 	"name": "FileStorageMonitor",
 	"author": "Universal Omega",
-	"version": "1.0",
 	"url": "https://github.com/WikiForge/FileStorageMonitor",
 	"descriptionmsg": "filestoragemonitor-desc",
+	"namemsg": "filestoragemonitor-extensionname",
 	"license-name": "GPL-3.0-or-later",
 	"type": "specialpage",
 	"requires": {
 		"MediaWiki": ">= 1.39.0"
+	},
+	"MessagesDirs": {
+		"FileStorageMonitor": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"FileStorageMonitorAliases": "FileStorageMonitorAliases.php"
 	},
 	"GroupPermissions": {
 		"sysop": {
