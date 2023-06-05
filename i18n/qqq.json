@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Universal Omega"
+		]
+	},
+	"action-monitor-file-storage": "{{doc-action|monitor-file-storage}}",
+	"filestoragemonitor": "{{doc-special}}",
+	"filestoragemonitor-desc": "{{desc|name=FileStorageMonitor|url=https://github.com/WikiForge/FileStorageMonitor}}",
+	"filestoragemonitor-extensionname": "{{name}}",
+	"right-monitor-file-storage": "{{doc-right|monitor-file-storage}}"
+}
