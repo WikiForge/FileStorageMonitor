@@ -10,7 +10,10 @@ class SpecialFileStorageMonitor extends SpecialPage {
 		parent::__construct( 'FileStorageMonitor', 'monitor-file-storage' );
 	}
 
-	public function execute() {
+	/**
+	 * @param string|null $subPage
+	 */
+	public function execute( $subPage ) {
 		$this->setHeaders();
 		$this->checkPermissions();
 
