@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Universal Omega"
+		]
+	},
+	"action-monitor-file-storage": "monitor file storage",
+	"filestoragemonitor": "File Storage Monitor",
+	"filestoragemonitor-desc": "Allows monitoring full S3 file storage usage for all wikis on WikiForge.",
+	"filestoragemonitor-extensionname": "FileStorageMonitor",
+	"right-monitor-file-storage": "Monitor file storage"
+}
